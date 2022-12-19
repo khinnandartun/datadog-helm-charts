@@ -30,7 +30,7 @@ datadog:
   # datadog.apiKey -- Your Datadog API key
 
   ## ref: https://app.datadoghq.com/account/settings#agent/kubernetes
-  apiKey: <DATADOG_API_KEY>
+  apiKey: e7a51f3112d4772bbe465e782f5d2974
 
   # datadog.apiKeyExistingSecret -- Use existing Secret which stores API key instead of creating a new one. The value should be set with the `api-key` key inside the secret.
 
@@ -41,7 +41,7 @@ datadog:
 
   ## If you are using clusterAgent.metricsProvider.enabled = true, you must set
   ## a Datadog application key for read access to your metrics.
-  appKey:  # <DATADOG_APP_KEY>
+  appKey: c94b98bd6a67d997fc4a3a794ddc3f19e1f22129
 
   # datadog.appKeyExistingSecret -- Use existing Secret which stores APP key instead of creating a new one. The value should be set with the `app-key` key inside the secret.
 
@@ -96,7 +96,7 @@ datadog:
   ## * Overall length should not be higher than 80 characters.
   ## Compared to the rules of GKE, dots are allowed whereas they are not allowed on GKE:
   ## https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1beta1/projects.locations.clusters#Cluster.FIELDS.name
-  clusterName:  # <CLUSTER_NAME>
+  clusterName: preprod-cluster
 
   # datadog.site -- The site of the Datadog intake to send Agent data to.
   # (documentation: https://docs.datadoghq.com/getting_started/site/)
@@ -106,7 +106,7 @@ datadog:
   ## Set to 'us3.datadoghq.com' to send data to the US3 site.
   ## Set to 'us5.datadoghq.com' to send data to the US5 site.
   ## Set to 'ddog-gov.com' to send data to the US1-FED site.
-  site:  # datadoghq.com
+  site:  us5.datadoghq.com
 
   # datadog.dd_url -- The host of the Datadog intake server to send Agent data to, only set this option if you need the Agent to send data to a custom URL
 
@@ -231,7 +231,7 @@ datadog:
           fieldPath: status.hostIP
     # datadog.kubelet.tlsVerify -- Toggle kubelet TLS verification
     # @default -- true
-    tlsVerify:  # false
+    tlsVerify: false
     # datadog.kubelet.hostCAPath -- Path (on host) where the Kubelet CA certificate is stored
     # @default -- None (no mount from host)
     hostCAPath:
@@ -355,13 +355,13 @@ datadog:
     # datadog.apm.portEnabled -- Enable APM over TCP communication (port 8126 by default)
 
     ## ref: https://docs.datadoghq.com/agent/kubernetes/apm/
-    portEnabled: false
+    portEnabled: true
 
     # datadog.apm.enabled -- Enable this to enable APM and tracing, on port 8126
     # DEPRECATED. Use datadog.apm.portEnabled instead
 
     ## ref: https://github.com/DataDog/docker-dd-agent#tracing-from-the-host
-    enabled: false
+    enabled: true
 
     # datadog.apm.port -- Override the trace Agent port
 
@@ -415,9 +415,14 @@ datadog:
 
   ## The Datadog Agent supports many environment variables.
   ## ref: https://docs.datadoghq.com/agent/docker/?tab=standard#environment-variables
-  env: []
+  # env: []
   #   - name: <ENV_VAR_NAME>
   #     value: <ENV_VAR_VALUE>
+  env:
+    - name: DD_HOSTNAME
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
 
   # datadog.confd -- Provide additional check configurations (static and Autodiscovery)
 
@@ -944,7 +949,7 @@ clusterAgent:
   livenessProbe:
     initialDelaySeconds: 15
     periodSeconds: 15
-    timeoutSeconds: 5
+    timeoutSeconds: 10
     successThreshold: 1
     failureThreshold: 6
 
@@ -953,7 +958,7 @@ clusterAgent:
   readinessProbe:
     initialDelaySeconds: 15
     periodSeconds: 15
-    timeoutSeconds: 5
+    timeoutSeconds: 10
     successThreshold: 1
     failureThreshold: 6
 
@@ -1205,7 +1210,7 @@ agents:
       livenessProbe:
         initialDelaySeconds: 15
         periodSeconds: 15
-        timeoutSeconds: 5
+        timeoutSeconds: 10
         successThreshold: 1
         failureThreshold: 6
 
@@ -1214,7 +1219,7 @@ agents:
       readinessProbe:
         initialDelaySeconds: 15
         periodSeconds: 15
-        timeoutSeconds: 5
+        timeoutSeconds: 10
         successThreshold: 1
         failureThreshold: 6
 
@@ -1282,7 +1287,7 @@ agents:
       livenessProbe:
         initialDelaySeconds: 15
         periodSeconds: 15
-        timeoutSeconds: 5
+        timeoutSeconds: 10
 
       # agents.containers.traceAgent.securityContext -- Allows you to overwrite the default container SecurityContext for the trace-agent container.
       securityContext: {}
@@ -1611,7 +1616,7 @@ clusterChecksRunner:
   livenessProbe:
     initialDelaySeconds: 15
     periodSeconds: 15
-    timeoutSeconds: 5
+    timeoutSeconds: 10
     successThreshold: 1
     failureThreshold: 6
 
@@ -1628,7 +1633,7 @@ clusterChecksRunner:
   readinessProbe:
     initialDelaySeconds: 15
     periodSeconds: 15
-    timeoutSeconds: 5
+    timeoutSeconds: 10
     successThreshold: 1
     failureThreshold: 6
 

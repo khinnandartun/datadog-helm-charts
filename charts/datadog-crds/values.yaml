@@ -4,11 +4,11 @@
 
 crds:
   # crds.datadogMetrics -- Set to true to deploy the DatadogMetrics CRD
-  datadogMetrics: false
+  datadogMetrics: true
   # crds.datadogAgents -- Set to true to deploy the DatadogAgents CRD
-  datadogAgents: false
+  datadogAgents: true
   # crds.datadogMonitors -- Set to true to deploy the DatadogMonitors CRD
-  datadogMonitors: false
+  datadogMonitors: true
 
 migration:
   datadogAgents:

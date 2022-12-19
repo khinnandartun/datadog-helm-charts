@@ -125,11 +125,11 @@ podLabels: {}
 collectOperatorMetrics: true
 
 # watchNamespaces -- Restrics the Operator to watch its managed resources on specific namespaces
-watchNamespaces: []
+# watchNamespaces: []
 # example: watch only two namespaces:
-# watchNamespaces:
-# - "default"
-# - "datadog"
+watchNamespaces:
+- "default"
+- "datadog"
 #
 # to watch all namespaces
 # watchNamespaces:

@@ -15,10 +15,10 @@ sources:
 maintainers:
 - name: Datadog
   email: support@datadoghq.com
-dependencies:
-- name: datadog-crds
-  version: "=0.5.7"
-  repository: https://helm.datadoghq.com
-  condition: installCRDs
-  tags:
-  - install-crds
+# dependencies:
+# - name: datadog-crds
+#   version: "=0.5.8"
+#   repository: https://helm.datadoghq.com
+#   condition: installCRDs
+#   tags:
+#   - install-crds
